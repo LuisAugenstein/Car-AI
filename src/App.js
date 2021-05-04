@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, {useState} from 'react'
+import { Box, Container, makeStyles, Button, Grid, Typography } from '@material-ui/core'
+import GameFrame from './GameFrame'
+
+const useStyles = makeStyles(theme => ({
+  main: {
+    //width: "100vw",
+    minHeight: "100vh",
+    backgroundColor: theme.palette.background.default
+  },
+}))
+
 
 function App() {
+  const classes = useStyles()
+  const [isLoopOn, setLoopOn] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className={classes.main}>
+      <Container>
+        <Grid container justify="center">
+          <Box m={2}>
+            <Typography color="textPrimary" variant="h4" margin={40}>
+              Car-AI
+          </Typography>
+          </Box>
+
+          <GameFrame isLoopOn={isLoopOn}/>
+
+          <Box m={2}>
+            <Button onClick={() => setLoopOn(!isLoopOn)} variant="contained" color="primary">
+              {isLoopOn ? "Stop Loop" : "Start Loop"}
+            </Button>
+          </Box>
+
+        </Grid>
+      </Container>
+    </main>
   );
 }
 
